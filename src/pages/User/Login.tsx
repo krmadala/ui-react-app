@@ -1,8 +1,53 @@
+import { useLocation } from 'react-router-dom';
+import { loginUser } from '../api/userService';
+import { useState } from 'react';
+
 export default function Login() {
+  const location = useLocation();
+  const successMessage = location.state?.successMessage;
+  const [errors, setErrors] = useState('');
+  const handleLogin =  (email: string, password: string) => {
+       try {
+           loginUser(email, password).then((response) => {
+           
+            if (response) {
+              // Store the token in local storage or session storage
+              localStorage.setItem('token', response);
+              // Redirect to the dashboard or any other page
+              window.location.href = '/dashboard';
+            } else {
+              // Handle login failure (e.g., show an error message)
+              setErrors('Login failed');
+            }
+          }).catch(error => {
+            // Handle error (e.g., show an error message)
+            setErrors('Error during login:' + error.message);
+          });
+       }  
+       catch (error) {
+        throw error;
+       }
+  };
     return (
       <>
 
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        {successMessage && (
+                <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-lg">
+                   <p className="text-lg font-semibold">User </p>
+                   <p>User has been successfully confirmed and is now being processed.</p>
+                </div>)
+                }
+                {errors && Object.keys(errors).length > 0 &&
+                <div role="alert">
+        <div className="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+            Danger
+        </div>
+        <div className="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+            <p>{errors}</p>
+        </div>
+        </div>
+        }
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <img
               alt="Your Company"
@@ -13,6 +58,7 @@ export default function Login() {
               Sign in to your account
             </h2>
           </div>
+              
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form action="#" method="POST" className="space-y-6">
@@ -57,6 +103,12 @@ export default function Login() {
   
               <div>
                 <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const email = (document.getElementById('email') as HTMLInputElement).value;
+                    const password = (document.getElementById('password') as HTMLInputElement).value;
+                    handleLogin(email, password);
+                  }}
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
