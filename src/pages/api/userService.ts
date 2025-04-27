@@ -37,10 +37,17 @@ export interface Address {
       throw error;
     }
   }
-
+  export async function logout() {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/users/logout`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
 export async function getUserProfile(userId: string) {
         try {
-        const response = await axios.get(`${API_BASE_URL}/users/${userId}`);
+        const response = await axios.get(`${API_BASE_URL}/users/${userId}`,{ withCredentials: true });
         return response.data;
         } catch (error) {
         throw error;
@@ -49,7 +56,8 @@ export async function getUserProfile(userId: string) {
 
  export async function getAllUsers() {
         try {
-        const response = await axios.get(`${API_BASE_URL}/users`);
+        const response = await axios.get(`${API_BASE_URL}/users`,{ withCredentials: true });
+        debugger;
         return response.data;
         } catch (error) {
         throw error;

@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@progress/kendo-react-grid": "^10.2.0",
+    "@progress/kendo-theme-default": "^10.5.0",
     "@tailwindcss/vite": "^4.1.4",
     "@tanstack/react-table": "^8.21.3",
     "axios": "^1.9.0",

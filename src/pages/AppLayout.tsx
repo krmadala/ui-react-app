@@ -11,7 +11,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
           <nav className="flex flex-col p-4 space-y-2">
             <a href="/Dashboard" className="p-2 rounded hover:bg-gray-200">Dashboard</a>
             <a href="/profile" className="p-2 rounded hover:bg-gray-200">Profile</a>
-            <a href="/users" className="p-2 rounded hover:bg-gray-200">users</a>
+            <a href="/usersearch" className="p-2 rounded hover:bg-gray-200">users</a>
             <a href="/Logout" className="p-2 rounded hover:bg-gray-200">Logout</a>
           </nav>
         </aside>

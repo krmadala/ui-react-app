@@ -9,10 +9,10 @@ export default function Login() {
   const handleLogin =  (email: string, password: string) => {
        try {
            loginUser(email, password).then((response) => {
-           
+           alert(response);
             if (response) {
-              // Store the token in local storage or session storage
-              localStorage.setItem('token', response);
+              debugger;
+              console.log('Login successful:', response);
               // Redirect to the dashboard or any other page
               window.location.href = '/dashboard';
             } else {
