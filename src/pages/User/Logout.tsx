@@ -8,14 +8,15 @@ default export function Logout() {
                 console.log('Logout successful:', response);
                 // Redirect to login page or perform any other action
                 window.location.href = '/login'; // Redirect to login page
-            }
+            })
             .catch((error) => {
 
                 console.error('Logout failed:', error);
                 // Handle logout failure (e.g., show an error message)
             }
         );
-
+        console.log('User logged out');
+        window.location.href = '/login'; // Redirect to login page
     };
 
     return (
